@@ -20,8 +20,8 @@ return [
             'options'   => [],
         ],
     ],
-    \yii\mutex\Mutex::class => Reference::to('mutex'),
+    \Yiisoft\Mutex\Mutex::class => Reference::to('mutex'),
     'mutex'                 => [
-        '__class' => \yii\mutex\MysqlMutex::class,
+        '__class' => \Yiisoft\Mutex\MysqlMutex::class,
     ],
 ];

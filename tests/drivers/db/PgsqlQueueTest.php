@@ -23,6 +23,6 @@ class PgsqlQueueTest extends TestCase
      */
     protected function getQueue()
     {
-        return Yii::$app->pgsqlQueue;
+        return $this->container->get('pgsqlQueue');
     }
 }

@@ -8,8 +8,6 @@
 
 namespace Yiisoft\Yii\Queue\Tests\Drivers\Db;
 
-use yii\helpers\Yii;
-use Yiisoft\Yii\Queue\Drivers\Db\Queue;
 
 /**
  * Sqlite Queue Test.
@@ -19,10 +17,10 @@ use Yiisoft\Yii\Queue\Drivers\Db\Queue;
 class SqliteQueueTest extends TestCase
 {
     /**
-     * @return Queue
+     * @return mixed|\Yiisoft\Yii\Queue\Queue
      */
     protected function getQueue()
     {
-        return Yii::$app->sqliteQueue;
+        return $this->container->get('sqliteQueue');
     }
 }

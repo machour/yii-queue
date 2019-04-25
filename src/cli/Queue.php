@@ -105,7 +105,7 @@ abstract class Queue extends BaseQueue implements BootstrapInterface
         $exitCode = null;
 
         try {
-            call_user_func($handler, function () use ($loop, $event) {
+            $handler(function () use ($loop, $event) {
                 $this->trigger(WorkerEvent::loop($event));
 
                 return $event->exitCode === null && $loop->canContinue();

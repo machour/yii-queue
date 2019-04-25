@@ -179,7 +179,7 @@ abstract class Queue extends Component
      */
     protected function handleMessage($id, $message, $ttr, $attempt)
     {
-        list($job, $error) = $this->unserializeMessage($message);
+        [$job, $error] = $this->unserializeMessage($message);
 
         $event = ExecEvent::before($id, $job, $ttr, $attempt, $error);
         $this->trigger($event);
@@ -194,7 +194,6 @@ abstract class Queue extends Component
             $event->result = $event->job->execute($this);
         } catch (\Exception $error) {
             $event->error = $error;
-
             return $this->handleError($event);
         } catch (\Throwable $error) {
             $event->error = $error;
@@ -247,7 +246,7 @@ abstract class Queue extends Component
         } elseif ($event->job instanceof RetryableJobInterface) {
             $event->retry = $event->job->canRetry($event->attempt, $event->error);
         }
-        $this->trigger(ExecEvent::after($event));
+        $this->trigger(ErrorEvent::after($event));
 
         return !$event->retry;
     }
